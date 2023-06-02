@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Box } from "@mui/material";
@@ -26,6 +26,7 @@ const DateRangePicker: React.FC<Props> = ({
   const [showEnd, setShowEnd] = useState(false);
   const [startDate, setStartDate] = useState<Dayjs | null>(null);
   const [endDate, setEndDate] = useState<Dayjs | null>(null);
+  const startDateRef = useRef(null);
 
   useEffect(() => {
     onChange?.(
@@ -45,10 +46,13 @@ const DateRangePicker: React.FC<Props> = ({
         }}
       >
         <DatePicker
+          ref={startDateRef}
           label={label?.start ?? "Start"}
           defaultValue={(value?.[0] && dayjs(value?.[0])) ?? startDate}
           onChange={(date) => {
             if (date) setStartDate(date);
+          }}
+          onAccept={() => {
             setShowStart(false);
             setShowEnd(true);
           }}

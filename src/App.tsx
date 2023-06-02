@@ -26,7 +26,7 @@ function App() {
         }}
         value={[startDate, endDate]}
         onChange={handleDateChange}
-        format="DD-MM-YYYY"
+        format="DD/MM/YYYY"
       />
     </>
   );
